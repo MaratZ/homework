@@ -13,12 +13,13 @@ def mask_account_card(number: str) -> str:
     return result
 
 
+
+
+
 def get_date(date: str) -> str:
     """Функция преобразования даты и времени"""
     return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
     
     
 #print(get_date('2024-07-11T02:26:18.671407'))
-    if __name__ == '__main__':
-        print(mask_account_card('Счет 12345678901234567890'))
-        print(mask_account_card('Visa Platinum 1234567890123456'))
+

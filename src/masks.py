@@ -15,4 +15,7 @@ def mask_account(acc_number: str) -> str | None:
 
 
 def get_mask_account_card():
-    return None
+    if __name__ == '__main__':
+        print(mask_account_card('Счет 12345678901234567890'))
+        print(mask_account_card('Visa Platinum 1234567890123456'))
+        return None
