@@ -28,5 +28,5 @@ def sort_by_date(
     )
     return sorted_list
 
-#print(f'{filter_by_state(list_of_dicts)}')
-#print(f'{sort_by_date(list_of_dicts)}')
+print(f'{filter_by_state(list_of_dicts)}')
+print(f'{sort_by_date(list_of_dicts)}')
