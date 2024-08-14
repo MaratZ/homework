@@ -1,4 +1,4 @@
-from src.masks import get_mask_account, get_mask_card
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(number: str) -> str:
@@ -6,7 +6,7 @@ def mask_account_card(number: str) -> str:
     if number.lower().startswith('счет'):
         return f"Счет {get_mask_account(number)}"
     else:
-        cards = get_mask_card(number[-16:])
+        cards = get_mask_card_number(number[-16:])
         new_card = number.replace(number[-16:], cards)
     return new_card
 
@@ -25,5 +25,5 @@ print(get_date('2024-07-11T02:26:18.671407'))
 
 
 #if __name__ == '__main__':
-    #print(get_mask_card('Счет 12345678901234567890'))
-    #print(get_mask_card('Visa Platinum 1234567890123456'))
+   # print(get_mask_card('Счет 12345678901234567890'))
+  #  print(get_mask_card('Visa Platinum 1234567890123456'))
