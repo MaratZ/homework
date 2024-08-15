@@ -8,25 +8,26 @@ list_of_dicts = [
 ]
 
 
-def filter_by_state(list_of_dict: list[dict[str, Any]], state: str = "EXECUTED") -> Any:
-    """
-    Функция принимает на вход список словарей и значение для ключа и возвращает новый
-    список содержащий только те словари у которых ключ содержит переданное в функцию
-    значение.
-    """
-    return [d for d in list_of_dict if d.get("state") == state]
+from typing import Iterable
+from typing import Any
 
-def sort_by_date(
-    list_of_dict: list[dict[str, Any]], reverse: bool = True
-) -> list[dict[str, Any]]:
-    """
-    Функция принимает на вход список словарей и возвращает новый список, в котором исходные
-    словари отсортированы по убыванию даты
-    """
-    sorted_list = sorted(
-        list_of_dict, key=lambda new_list_of_dict: new_list_of_dict["date"], reverse=reverse
-    )
-    return sorted_list
 
-#print(f'{filter_by_state(list_of_dicts)}')
-#print(f'{sort_by_date(list_of_dicts)}')
+def filter_by_state(filter_state: Iterable, state="EXECUTED") -> Any and Iterable:
+    """Функция принимает список словарей и возвращает новый список словарей содержащий только
+    те словари, у которых ключ state соответствует указанному значению"""
+    new_filter_state = []
+
+    for dictionary_state in filter_state:
+        if dictionary_state["state"] == state:
+            new_filter_state.append(dictionary_state)
+
+    return new_filter_state
+
+
+def sort_by_date(sort_state: list[dict[str, Any]], reverse=False) -> list[dict[str, Any]]:
+    """Функция возвращает новый список отсортированный по дате"""
+    sorted_state_date = sorted(sort_state, key=lambda sort_state: sort_state["date"], reverse=reverse)
+    return sorted_state_date
+
+print(f'{filter_by_state(list_of_dicts)}')
+print(f'{sort_by_date(list_of_dicts)}')

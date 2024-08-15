@@ -1,29 +1,29 @@
 from src.masks import get_mask_account, get_mask_card_number
 
-
-def mask_account_card(number: str) -> str:
-    """Функция для маскировки счетов и карт"""
-    if number.lower().startswith('счет'):
-        return f"Счет {get_mask_account(number)}"
+def mask_account_card(account_card: str) -> str:
+    """Функция принимает на вход номер карты или счета и возращает их маску"""
+    bank_account = "Счет"
+    index_account_card = account_card.find(bank_account)
+    list_account_card = account_card.split(" ")
+    if index_account_card == -1:
+        list_account_card[-1] = get_mask_card_number(list_account_card[-1])
+        mask_card_account = " ".join(list_account_card)
+        return mask_card_account
     else:
-        cards = get_mask_card_number(number[-16:])
-        new_card = number.replace(number[-16:], cards)
-    return new_card
-
-
-print(mask_account_card('Счет 73654108430135874305'))
-print(mask_account_card('Maestro 7000792289606361'))
-print(mask_account_card('Visa Platinum 7000792289606361'))
+        list_account_card[-1] = get_mask_account(list_account_card[-1])
+        mask_score_account = " ".join(list_account_card)
+        return mask_score_account
 
 
 def get_date(date: str) -> str:
-    """Функция преобразования даты и времени"""
-    return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
-    
-    
-print(get_date('2024-07-11T02:26:18.671407'))
+    """Функция которая принимает на вход строку с датой в формате
+    2024-03-11T02:26:18.671407 и возвращает строку с датой в формате ДД.ММ.ГГГГ"""
+    if date == '':
+        return ''
+    else:
+        return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
 
-
-#if __name__ == '__main__':
-   # print(get_mask_card('Счет 12345678901234567890'))
-  #  print(get_mask_card('Visa Platinum 1234567890123456'))
+#def get_date(date:str) -> str:
+    #date_format = date[0:10].split("-")
+    #return "-".join(date_format[::-1])
+#print(get_date(""))
