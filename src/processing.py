@@ -12,7 +12,7 @@ from typing import Iterable
 from typing import Any
 
 
-def filter_by_state(filter_state: Iterable, state="EXECUTED") -> Any and Iterable:
+def filter_by_state(filter_state: Iterable, state="EXECUTED") -> Any and Iterable: # type: ignore
     """Функция принимает список словарей и возвращает новый список словарей содержащий только
     те словари, у которых ключ state соответствует указанному значению"""
     new_filter_state = []
@@ -24,7 +24,7 @@ def filter_by_state(filter_state: Iterable, state="EXECUTED") -> Any and Iterabl
     return new_filter_state
 
 
-def sort_by_date(sort_state: list[dict[str, Any]], reverse=False) -> list[dict[str, Any]]:
+def sort_by_date(sort_state: list[dict[str, Any]], reverse=False) -> list[dict[str, Any]]: # type: ignore
     """Функция возвращает новый список отсортированный по дате"""
     sorted_state_date = sorted(sort_state, key=lambda sort_state: sort_state["date"], reverse=reverse)
     return sorted_state_date

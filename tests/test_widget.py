@@ -8,7 +8,7 @@ from src.widget import mask_account_card, get_date
     ('Visa Classic 6831982476737658', 'Visa Classic 6831 98** **** 7658'),
     ('Visa Platinum 8990922113665229', 'Visa Platinum 8990 92** **** 5229'),
     ('Visa Gold 5999414228426353', 'Visa Gold 5999 41** **** 6353')])
-def test_mask_account_card(nums, mask):
+def test_mask_account_card(nums, mask): # type: ignore
     assert mask_account_card(nums) == mask
 
 
@@ -18,5 +18,5 @@ def test_mask_account_card(nums, mask):
     ('2022-05-30T15:43:16.25613', '30.05.2022'),
     ('2023-11-03T00:00:00', '03.11.2023'),
     ('2024-03-11', '11.03.2024')])
-def test_get_date(date, expected):
+def test_get_date(date, expected): # type: ignore
     assert get_date(date) == expected
