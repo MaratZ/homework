@@ -1,17 +1,14 @@
-def get_mask_card_number(card_number: str) -> str:
-    """Функция принимает на вход номер карты и возвращает ее маску"""
+def get_mask_card_number(card_number: int) -> str:
+    """Функция принимает на вход номер карты и возвращает ее маску.
+    7000 79** **** 6361"""
+    if len(str(card_number)) != 16:
+        raise ValueError("Неправильный номер карты")
+    return f"{int(str(card_number)[:4])} {int(str(card_number)[4:6])}** **** {int(str(card_number)[12:])}"
 
-    if card_number.isdigit() and len(card_number) == 16:
-        return f"{card_number[0:4]} {card_number[4:6]}** **** {card_number[12:]}"
-    else:
-        return ''
 
-
-def get_mask_account(account: str) -> str:
-    """Функция принимает на вход номер счета и возвращает его маску"""
-    if account.isdigit() and len(account) == 20:
-        return f"{'*' * 2}{account[16:]}"
-    else:
-        return ''
-
-print(get_mask_card_number("1234567891234567"))
+def get_mask_account(account_number: int) -> str:
+    """Функция принимает на вход номер счета и возвращает его маску.
+    **4305"""
+    if len(str(account_number)) != 20:
+        raise ValueError("Неправильный номер счета")
+    return f"**{int(str(account_number)[-4:])}"

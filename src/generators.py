@@ -1,28 +1,30 @@
-from typing import Iterator
-
-import pytest
-
-
-def filter_by_currency(transaction_list: list[dict], code_of_currency: str) -> Iterator:
-    """Функция возвращает итератор, где валюта соответствует заданной в параметре"""
-    if len(transaction_list) > 0:
-        for transaction in transaction_list:
-            if transaction["operationAmount"]["currency"]["code"] == code_of_currency:
-                yield transaction
-    elif len(transaction_list) < 0:
-        raise StopIteration("Ввели пустой список!")
-    elif transaction_list == list():
-        raise AssertionError("Ввели пустой список!")
+import sys
+from typing import Generator, Any
 
 
-# usd_transactions = filter_by_currency(transactions, "USD")
+def filter_by_currency(transactions: list, currency_code: str = "USD") -> Generator[Any, Any, Any]:
+    """Функция выдает транзакции, где валюта операции соответствует заданной."""
+    if transactions == []:
+        sys.exit("Нет транзакций")
+    for i in transactions:
+        if i.get("operationAmount").get("currency").get("code") != currency_code:
+            sys.exit("В транзакциях нет такого кода")
+        elif i.get("operationAmount").get("currency").get("code") == currency_code:
+            yield i
 
-# for item in range(2):
-#     print(next(usd_transactions))
-# list_of_results = list()
-#     for transaction in transaction_list:
-#         if transaction["operationAmount"]["currency"]["code"] == code_of_currency:
-#             yield transaction
-#             list_of_results.append(transaction)
-#     if len(list_of_results) <= 0:
-#         raise StopIteration("Ввели пустой список!")
+
+def transaction_descriptions(transactions: list) -> Generator[Any, Any, Any]:
+    """Функция принимает список словарей с транзакциями и возвращает описание каждой операции по очереди."""
+    if not transactions:
+        sys.exit("Нет транзакций")
+    for description_operation in transactions:
+        yield description_operation.get("description")
+
+
+def card_number_generator(start: int, stop: int) -> Generator[str, Any, None]:
+    """Функция может сгенерировать номера карт в заданном диапазоне
+    от 0000 0000 0000 0001 до 9999 9999 9999 9999."""
+    for x in range(start, stop + 1):
+        number_zero = "0000000000000000"
+        card_number = number_zero[: -len(str(x))] + str(x)
+        yield f"{card_number[:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:]}"

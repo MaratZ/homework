@@ -1,27 +1,30 @@
 import pytest
-
-from src.masks import get_mask_account, get_mask_card_number
-
-
-@pytest.mark.parametrize("number, expected", [
-    ('7000792289606361', '7000 79** **** 6361'),
-    ('700079228960636', ''),
-    ('a00079228960636', ''),
-    ('70007922896063612', '')])
-def test_get_mask_card_number(number, expected: str) -> str: # type: ignore
-    assert get_mask_card_number(number) == expected
+from src.masks import get_mask_card_number, get_mask_account
 
 
-@pytest.mark.parametrize("account, expected_acc", [
-    ('73654108430135874305', '**4305'),
-    ('700079228960636', ''),
-    ('7365410843013587430a', ''),
-    ('736541084301358743051', '')])
-def test_get_mask_account(account, expected_acc): # type: ignore
-    assert get_mask_account(account) == expected_acc
+def test_mask_card_number():# type: ignore
+    assert get_mask_card_number(7000792289606361) == '7000 79** **** 6361'
 
 
-#def test_mask_account_empty():
-    #assert get_mask_card_number('') == ''
+def test_mask_account():# type: ignore
+    assert get_mask_account(73654108430135874305) == '**4305'
 
 
+def test_mask_card_no_number_invalid():# type: ignore
+    with pytest.raises(ValueError):
+        get_mask_card_number('')
+
+
+def test_mask_card_number_invalid():# type: ignore
+    with pytest.raises(ValueError):
+        get_mask_card_number(7000792289606361098776)
+
+
+def test_mask_account_no_number_invalid():# type: ignore
+    with pytest.raises(ValueError):
+        get_mask_account('')
+
+
+def test_mask_account_number_invalid():# type: ignore
+    with pytest.raises(ValueError):
+        get_mask_account(70007922896063618758432098776)
