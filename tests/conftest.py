@@ -1,4 +1,6 @@
 import pytest
+
+
 @pytest.fixture
 def card_numbers() -> list[str]:
     return ["1596837868705199", "7158300734726758", "6831982476737658"]

@@ -1,5 +1,5 @@
 import sys
-from typing import Generator, Any
+from typing import Any, Generator
 
 
 def filter_by_currency(transactions: list, currency_code: str = "USD") -> Generator[Any, Any, Any]:
