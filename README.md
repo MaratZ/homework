@@ -44,13 +44,28 @@ https://github.com/MaratZ/homework_10_1
 ### Написать в терминале 'pytest' pytest это фреймворк с помощью которого мы проверяем функции в коде
 
 # Описание модулей
-## Модуль masks
+## Модуль masks(изменение)
 1. Принимает номер карты отдает на выход маску номера карты
   - функция get_mask_card_number
   - пример маски номера 7000 79** **** 6361
 2. Принимает номер счета отдает на выход маску номера счета
 - функция get_mask_account
 - пример маски номера **4305
+
+В модуль добавлен логгер, который записывает логи в файл.
+
+```
+logger = logging.getLogger("masks")
+logger.setLevel(logging.INFO)
+file_handler = logging.FileHandler(
+    "../logs/masks.log", encoding="utf-8"
+)
+file_formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s: %(message)s"
+)
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+```
 
 ### Модуль widget 
 1. Принимает имя и номер карты или счета отдает на выход имя и маску номера карты или счета
@@ -83,16 +98,30 @@ https://github.com/MaratZ/homework_10_1
 4. Если filename не задан, то логи выводятся в консоль.
 5. Если вызов функции закончился ошибкой, записывается сообщение об ошибке и входные параметры функции.
 
-## Модуль utils(new)
+## Модуль utils(изменение)
 1. Функция financial_transactions принимает на вход путь до JSON-файла и возвращает список словарей с данными о 
 финансовых транзакциях.
 2. JSON-файл находится в директории data.
 3. Функция transaction_amount принимает на вход транзакцию и возвращает сумму транзакции в рублях.
+4. В модуль добавлен логгер, который записывает логи в файл.
 
-## Модуль external_api(new)
+```
+logger = logging.getLogger("utils")
+logger.setLevel(logging.INFO)
+file_handler = logging.FileHandler(
+    "../logs/utils.log", encoding="utf-8"
+)
+file_formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s: %(message)s"
+)
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+```
+
+## Модуль external_api
 1. Функция конвертации currency_conversion, используется функцией transaction_amount, если валюта транзакции не рубль.
 
-##### Docstring и аннотации типов(new)
+##### Docstring и аннотации типов
 1. все функции должны содержать docstring и корректные аннотации типов. 
 2. Пример docstring:
     ```python
@@ -105,3 +134,4 @@ https://github.com/MaratZ/homework_10_1
          """
          pass
      ```
+

@@ -6,7 +6,7 @@ from src.external_api import currency_conversion
 
 
 @pytest.fixture
-def trans_1():
+def trans_1():# type: ignore
     return {
         "id": 441945886,
         "state": "EXECUTED",
@@ -24,7 +24,7 @@ def trans_1():
 
 
 @patch('requests.get')
-def test_currency_conversion(mock_get, trans_1):
+def test_currency_conversion(mock_get, trans_1):# type: ignore
     mock_get.return_value.json.return_value = {'success': True, 'query':
                                                {'from': 'USD', 'to': 'RUB', 'amount': 8221.37}, 'info':
                                                {'timestamp': 1724671757, 'rate': 91.475458},
