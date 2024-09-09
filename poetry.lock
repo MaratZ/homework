@@ -404,3 +404,13 @@ files = [
 lock-version = "2.0"
 python-versions = "^3.12"
 content-hash = "ee9dc6097b23fa60fa7b63fbf80b370a0ea6f02cbb152ff055943bc5df58cc53"
+
+
+
+requests = "^2.32.3"
+python-dotenv = "^1.0.1"
+pandas = "^2.2.2"
+openpyxl = "^3.1.5"
+
+
+[tool.poetry.group.lint.dependencies]
