@@ -1,14 +1,10 @@
 import os
+from typing import Iterator
 
 from src.processing import filter_by_state, sort_by_date
-from typing import Iterator
-from src.utils import (
-    filter_by_currency,
-    filter_by_description,
-    get_transactions_info_csv,
-    get_transactions_info_json,
-    get_transactions_info_xlsx,
-)
+from src.utils import (filter_by_currency, filter_by_description,
+                       get_transactions_info_csv, get_transactions_info_json,
+                       get_transactions_info_xlsx)
 from src.widget import get_data, mask_account_card
 
 # Получаем абсолютный путь до текущей директории
