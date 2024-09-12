@@ -1,11 +1,14 @@
 import os
-from typing import Iterator
 
 from src.processing import filter_by_state, sort_by_date
-from src.utils import (filter_by_currency, filter_by_description,
-                       get_transactions_info_csv, get_transactions_info_json,
-                       get_transactions_info_xlsx)
-from src.widget import get_data, mask_account_card
+from src.utils import (
+    filter_by_currency,
+    filter_by_description,
+    get_transactions_info_csv,
+    get_transactions_info_json,
+    get_transactions_info_xlsx,
+)
+from src.widget import get_date, mask_account_card
 
 # Получаем абсолютный путь до текущей директории
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -147,7 +150,7 @@ def main():
         print(" ")
 
         for i in description_filter:
-            print(f"{get_data(i['date'])} {str(i['description'])}")
+            print(f"{get_date(i['date'])} {str(i['description'])}")
             if i["description"] == "Открытие вклада":
                 print(f"Счет {mask_account_card(i['to'])}")
                 print(f'Сумма: {i["operationAmount"].get('amount')}')
@@ -173,34 +176,3 @@ def main():
 
 
 main()
-
-
-def filter_by_currency(transaction_list: list[dict], code_of_currency: str) -> Iterator:
-    """Функция возвращает итератор, где валюта соответствует заданной в параметре"""
-    if not transaction_list:
-        raise TypeError("Список транзакций пустой!")
-
-    filtred_transactions = filter(# type: ignore
-        lambda transaction: transaction.get("operationAmount").get("currency").get("code") == code_of_currency,# type: ignore
-        transaction_list,
-    )
-    return filtred_transactions
-
-
-def transaction_descriptions(transaction_list: list[dict]) -> Iterator:
-    """Функция возвращает описания для транзакций"""
-    for transaction in transaction_list:
-        yield transaction["description"]
-
-
-def card_number_generator(start: int, stop: int) -> Iterator[str]:
-    """Генератор номеров карт формата 'ХХХХ ХХХХ ХХХХ ХХХХ' в заданном числовом диапозоне"""
-    if not isinstance(start, (int | float)) or not isinstance(stop, (int | float)):
-        raise TypeError("Ошибка типа данных")
-    for x in range(start, stop + 1):
-        card_number = f"{x:016}"
-        formatted_number = f"{card_number[:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:]}"
-        yield formatted_number
-
-
-

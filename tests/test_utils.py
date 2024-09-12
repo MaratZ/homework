@@ -14,18 +14,6 @@ def path():# type: ignore
 
 
 @pytest.fixture
-def path_empty_list():# type: ignore
-    PATH_TO_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations_1.json")
-    return PATH_TO_FILE
-
-
-@pytest.fixture
-def path_mistake_json():# type: ignore
-    PATH_TO_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations_2.json")
-    return PATH_TO_FILE
-
-
-@pytest.fixture
 def trans():# type: ignore
     return {
         "id": 441945886,
